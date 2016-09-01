@@ -1,7 +1,9 @@
 # Botmensajes-NodeBB
 Bot que cuenta el número de mensajes de cada usuario de los temas. Responde al ser llamado con una tabla.
 
-Para obtener la sesión del foro es necesario haber iniciado sesión desde un navegador y copiarle la cookie en `cookie.py`
+### Para que funcione: 
+1. Inicia sesión desde un navegador y copiarle la cookie express.sid en `Configuracion.py`
+2. Pon el nick del bot para que reconozca las menciones en `Configuracion.py`
 
 # Dependencies
 
