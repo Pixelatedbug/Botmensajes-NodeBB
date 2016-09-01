@@ -5,7 +5,7 @@ import urllib2,json
 from collections import defaultdict # para convertir a array
 import collections 
 import operator # para ordenar la lista
-from cookie import cookieexpresssid
+from Configuracion import cookieexpresssid
 import sys 
 import math
 
