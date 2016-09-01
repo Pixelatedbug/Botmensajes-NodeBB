@@ -1,0 +1,3 @@
+cookieexpresssid='s%3AcP5IvNbdmtnok0k9sBkF5wzQ26K9w2dZ.%2FCAXJ4X13Ito7dgyzFVq43sXwhdMfZBwaPNVS6ELeYw'
+
+nickdelbot="botmensajes"

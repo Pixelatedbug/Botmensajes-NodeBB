@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import urllib2,json
-from cookie import cookieexpresssid
+from Configuracion import cookieexpresssid, nickdelbot
 import re 
 import ssl
 
@@ -23,12 +23,18 @@ def _getnotificaciones():
 	for l in data["notifications"]:
 		#print l
 		if l["bodyShort"].find("notifications:user_mentioned_you_in")>0 and l["read"]==False:
+			
 			print "_getnotificaciones*******"
-			print l["bodyLong"]
+			try: 
+				print l["bodyLong"]
+			except UnicodeEncodeError:
+				print u"No se puede imprimit el mensaje por tener carácteres no unicode"
+			l["bodyLong"]
+				
 			usuario=l["user"]["userslug"]
 			
-			m = re.search('@botmensajes\s*(\d*)',l["bodyLong"])
-			m2 = re.search('@botmensajes\s{0,3}http[s]?:\/\/exo\.do\/topic\/(\d*)\/',l["bodyLong"])
+			m = re.search('@'+nickdelbot+'\s*([0-9]+)',l["bodyLong"])
+			m2 = re.search('@'+nickdelbot+'\s{0,3}http[s]?:\/\/exo\.do\/topic\/([0-9]+)\/',l["bodyLong"])
 
 			hilosolicitado=""
 			if m2 is not None:

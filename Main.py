@@ -3,7 +3,7 @@
 
 import websocket
 from time import sleep, time
-from cookie import cookieexpresssid
+from Configuracion import cookieexpresssid, nickdelbot
 from Listarusuarios import _tabladeusuarios
 from Vernotificaciones import _getnotificaciones
 import json, re
@@ -18,6 +18,8 @@ import sys
 #definimos el juego de car?cteres unicode
 reload(sys)  
 sys.setdefaultencoding('utf8')
+
+unmensajecadamaxsegundos=10
 
 global ws
 ws = websocket.WebSocket()
@@ -73,17 +75,21 @@ class ThreadingRecv(object):
 					
 			
 			#print result
-			if result != '3' and result.find("notifications:user_mentioned_you_in")>0:
+			if result != '3' and result.find("notifications:user_mentioned_you_in")>0 and result.find(""""path":"/chats""")==0:
 				#print str(i) + " -/-"
 				print "Main: ", result
 				m =re.search('^\d*\["event:new_notification",([\S\s]*)]',result)
 				if m is not None:
 					resultjson= m.group(1)
-					print "Main: ", resultjson
 					data  = json.loads(resultjson)
-					print "Main: ", data["bodyLong"]
-					m = re.search('@botmensajes\s{1,5}(\d*)',data["bodyLong"])
-					m2 = re.search('@botmensajes\s{1,5}http[s]?:\/\/exo\.do\/topic\/(\d*)\/',data["bodyLong"])
+					try: 
+						print "Main: ", resultjson
+						print "Main: ", data["bodyLong"]
+					except UnicodeEncodeError:
+						print u"No se puede imprimit el mensaje por tener car?cteres no unicode"
+						
+					m = re.search('@'+nickdelbot+'\s{1,5}([0-9]+)',data["bodyLong"])
+					m2 = re.search('@'+nickdelbot+'\s{1,5}http[s]?:\/\/exo\.do\/topic\/([0-9]+)\/',data["bodyLong"])
 
 					hilosolicitado=""
 					if m2 is not None:
@@ -127,7 +133,7 @@ while True:
 	try:
 		segundosrestantes= time()-ultimoenviado
 		if len(arraynotificaciones)>0: print "Main: Segundos restantes " + str(int(segundosrestantes)) + ". Arraynotificaciones: ", arraynotificaciones
-		if len(arraynotificaciones)>0 and segundosrestantes>15:
+		if len(arraynotificaciones)>0 and segundosrestantes>unmensajecadamaxsegundos:
 		
 			hilosolicitado,resptid,usuario = arraynotificaciones.pop(0)
 			

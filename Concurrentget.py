@@ -7,7 +7,7 @@ from Queue import Queue
 from time import sleep, time
 from collections import defaultdict # para convertir a array
 import urllib2,json
-from cookie import cookieexpresssid
+from Configuracion import cookieexpresssid
 
 global ws
 
