@@ -7,7 +7,7 @@ Bot que cuenta el número de mensajes de cada usuario de los temas. Responde al 
 
 # Dependencies
 
-Puedes instalarlas utilizando `pip install -r requirements.txt` o instalando tú mismo los paquetes:
+Puedes instalarlas utilizando `pip install -r requirements.txt` o instalando tú mismo los siguientes paquetes:
 
 ### 1. Websocket-client
 
