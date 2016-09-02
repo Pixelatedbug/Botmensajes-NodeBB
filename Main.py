@@ -56,6 +56,7 @@ class ThreadingRecv(object):
 			try:
 				ws.send("2")
 				result =  ws.recv()
+				if result != str(3): print result
 			except:
 				i=0
 				print "Main: Conexi?n perdida tratando de recuperarla...."
@@ -75,7 +76,7 @@ class ThreadingRecv(object):
 					
 			
 			#print result
-			if result != '3' and result.find("notifications:user_mentioned_you_in")>0 and result.find(""""path":"/chats""")==0:
+			if result != '3' and result.find("notifications:user_mentioned_you_in")>0 and result.find(""""path":"/chats""")<1:
 				#print str(i) + " -/-"
 				print "Main: ", result
 				m =re.search('^\d*\["event:new_notification",([\S\s]*)]',result)
