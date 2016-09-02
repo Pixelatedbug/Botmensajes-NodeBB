@@ -13,8 +13,3 @@ Puedes instalarlas utilizando `pip install -r requirements.txt` o instalando tú
 
 `pip install websocket-client` or download it from https://pypi.python.org/pypi/websocket-client
 
-# Screenshot
-
-https://github.com/Pixelatedbug/Botmensajes-NodeBB/master/screenshot/01.png
-
-![](//raw.githubusercontent.com/Pixelatedbug/Botmensajes-NodeBB/master/screenshot/01.png)
