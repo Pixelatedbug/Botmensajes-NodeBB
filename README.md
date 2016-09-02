@@ -15,4 +15,6 @@ Puedes instalarlas utilizando `pip install -r requirements.txt` o instalando tú
 
 # Screenshot
 
-![](//raw.github.com/Pixelatedbug/Botmensajes-NodeBB/master/screenshot/01.png?raw=true)
+https://github.com/Pixelatedbug/Botmensajes-NodeBB/master/screenshot/01.png
+
+![](//raw.githubusercontent.com/Pixelatedbug/Botmensajes-NodeBB/master/screenshot/01.png)
