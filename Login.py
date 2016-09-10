@@ -12,3 +12,4 @@ def _getexpresssid(url,username,password):
 		r= s.post(url,data=form_data)
 		encabezado= r.headers
 		mm = re.search("express\.sid=([^;]+);", encabezado["set-cookie"])
+	return mm.group(1)
