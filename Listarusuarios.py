@@ -51,7 +51,7 @@ def _listarusuarios(hilo): #Esta función solicita todas las páginas del hilo y
 		return -1, -1
 	
 	postcount=data["postcount"] #contamos los post en total
-	totalpost=len(data["posts"]) #contamos cuantos post estamos viendo
+	totalpost=len(data["posts"])-1 #contamos cuantos post estamos viendo
 	paginas=int(math.ceil(float(postcount)/int(totalpost))) #calculamos las páginas dividiendo y redondeando hacia arriba
 	
 	titulopost=data["title"] #Aprovechamos para sacar el título del hilo
@@ -64,6 +64,7 @@ def _listarusuarios(hilo): #Esta función solicita todas las páginas del hilo y
 		concurrencia=8
 	else: 
 		concurrencia=paginas+1
+	#concurrencia=2
 	array= _getsimultaneo(arrurl2,concurrencia) #Llamamos a la función que solicitará todas las páginas, calculara los subtotales de usuarios y nos devolverá una array de diccionarios con todos los usuarios.
 	
 	print "_listarusuarios: Fin del cálculo por partes. Inicio de unir diccionarios"
@@ -97,7 +98,10 @@ def _tabladeusuarios(hilo):
 	sys.setdefaultencoding('utf8')
 
 	list_usuarios, titulo = _listarusuarios(hilo)
+	total=0
 	if list_usuarios==-1: return -1 
+	for u in list_usuarios:
+		total = total + u[1]
 	titulo= titulo.encode('utf8')
 	string=  r"\n# ["+ titulo + r"]("+ r"//exo.do/topic/"+str(hilo)+ r""")\n:::\n Puesto | Usuario | Nº Post en hilo\n|---|---|---|\n"""
 	
@@ -105,7 +109,7 @@ def _tabladeusuarios(hilo):
 	for i, line in enumerate(list_usuarios):
 		i+=1
 		string= string + str(i) + r"|" +  line[0] + r"|" + str(line[1])+r"""\n"""
-	string= string + r"""\n:::"""
+	string= string + r"""|TOTAL| | """ + str(total) + r"""|\n:::"""
 	return string 
 	print "****FIN _tabladeusuario"
 		

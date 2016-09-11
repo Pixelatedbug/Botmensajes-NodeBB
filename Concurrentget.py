@@ -43,9 +43,7 @@ def doWork():
 			
 			
 		result= _contarunapagina(f.read())
-		
-		#print url, 
-		#print result
+		#print url, result
 		String.append(result)
 		f.close()
 		#return f.read()
