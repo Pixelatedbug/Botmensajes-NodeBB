@@ -50,9 +50,14 @@ def _listarusuarios(hilo): #Esta función solicita todas las páginas del hilo y
 		print "Error, no te has logueado"
 		return -1, -1
 	
+	#obsoleto
+	"""
 	postcount=data["postcount"] #contamos los post en total
 	totalpost=len(data["posts"])-1 #contamos cuantos post estamos viendo
 	paginas=int(math.ceil(float(postcount)/int(totalpost))) #calculamos las páginas dividiendo y redondeando hacia arriba
+	"""
+	
+	paginas=data["pagination"]["pageCount"]
 	
 	titulopost=data["title"] #Aprovechamos para sacar el título del hilo
 	

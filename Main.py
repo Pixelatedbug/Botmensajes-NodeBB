@@ -32,7 +32,7 @@ arraynotificaciones=[]
 class ThreadingRecv(object):
 	
 	
-	def __init__(self, interval=0.7):
+	def __init__(self, interval=0):
 		""" Constructor
 		:type interval: int
 		:param interval: Check interval, in seconds
@@ -40,8 +40,8 @@ class ThreadingRecv(object):
 		self.interval = interval
 
 		thread = Thread(target=self.run, args=())
-		thread.daemon = True							# Daemonize thread
-		thread.start()								  # Start the execution
+		thread.daemon = True						# Daemonize thread
+		thread.start()								# Start the execution
 
 	def recuperarconexion(self,ws):
 		ws.close()
@@ -104,6 +104,7 @@ class ThreadingRecv(object):
 						#usuario=data["user"]["userslug"]
 						print "Main: ", resptid
 						arraynotificaciones.append([hilosolicitado,resptid,''])
+						#arraynotificaciones= list(arraynotificaciones(t))
 					print "Main: Esperando..."
 						
 			sleep(self.interval)
@@ -133,9 +134,10 @@ print "Main: INICIANDO"
 while True:
 	try:
 		segundosrestantes= time()-ultimoenviado
-		if len(arraynotificaciones)>0: print "Main: Segundos restantes " + str(int(segundosrestantes)) + ". Arraynotificaciones: ", arraynotificaciones
-		if len(arraynotificaciones)>0 and segundosrestantes>unmensajecadamaxsegundos:
 		
+		if len(arraynotificaciones)>0: print "Main: Segundos restantes " + str(int(segundosrestantes)) + ". Arraynotificaciones: ", arraynotificaciones
+		
+		if len(arraynotificaciones)>0 and segundosrestantes>unmensajecadamaxsegundos:
 			hilosolicitado,resptid,usuario = arraynotificaciones.pop(0)
 			
 			respcont=_tabladeusuarios(hilosolicitado)
@@ -150,6 +152,7 @@ while True:
 					ws.send("""425["posts.reply",{"tid":"""+comillas+str(resptid)+comillas+""","content":"""+comillas+r"@"+usuario+" "+respcont +comillas + ""","lock":"false"}]""")
 				ultimoenviado=time()
 				print "Main: ***FIN del loop, mensaje enviado."
+				if len(arraynotificaciones)==0:ws.send("""4290["notifications.markAllRead"]""")
 				continue
 			else:
 				ws.send("""425["posts.reply",{"tid":"""+comillas+str(resptid)+comillas+""","content": "No puedo conseguir el hilo ["""+ str(hilosolicitado) + r"]("+ r"//exo.do/topic/"+str(hilosolicitado)+")"+ comillas+ ""","lock":"false"}]""")

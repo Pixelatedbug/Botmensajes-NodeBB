@@ -7,13 +7,10 @@ import re
 import ssl
 
 def _getnotificaciones():
-
-	
-	context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
-
+	#context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
 	url="https://exo.do/api/notifications"
 	req = urllib2.Request(url, headers={'User-Agent': 'Mozilla/5.0','Cookie':'express.sid='+cookieexpresssid})
-	f = urllib2.urlopen(req, context=context)
+	f = urllib2.urlopen(req)
 	array = f.read()
 	#print "_getnotificaciones: Array=", array
 	f.close()
@@ -49,4 +46,4 @@ def _getnotificaciones():
 	print "arrayestadisticas=", arrayestadisticas
 	return arrayestadisticas
 	
-_getnotificaciones()
+#_getnotificaciones()
