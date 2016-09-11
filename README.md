@@ -13,5 +13,8 @@ Puedes instalarlas utilizando `pip install -r requirements.txt` o instalando tú
 
 `pip install websocket-client` or download it from https://pypi.python.org/pypi/websocket-client
 
-# Problemas
-+ No cuenta exactamente los mensajes. Puede que al calcular varias páginas con varios hilos, alguna página se pierda por grabar los valores a la vez en la array.
+#TODO
++ Utilizar la función de Login.py en el script para capturar las cookies
+
+# Bugs
++ No se conocen
